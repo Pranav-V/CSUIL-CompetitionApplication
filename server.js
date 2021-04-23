@@ -10,9 +10,9 @@ console.log("here")
 app.use(cors())
 app.use(express.json())
 
-app.use(express.static(path.join(__dirname, 'index.html')))
+app.use(express.static(path.join(__dirname, 'client/build/')))
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'))
+    res.sendFile(path.join(__dirname, 'client/build/'))
 })
 console.log('here')
 mongoose.connect("mongodb+srv://pnav:pdatabase@cluster0.jvhte.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
@@ -20,14 +20,14 @@ const connection = mongoose.connection
 connection.once('open', () => {
     console.log('MongoDB connection established')
 })
-/*
+
 const userRouter = require('./routes/user')
 const answerRouter = require('./routes/answer')
 const adminRouter = require('./routes/admin')
 app.use('/users',userRouter)
 app.use('/answer',answerRouter)
 app.use('/admin',adminRouter)
-*/
+
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)
 })
