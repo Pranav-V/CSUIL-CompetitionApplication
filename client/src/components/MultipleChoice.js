@@ -36,7 +36,7 @@ export default function MultipleChoice()
     },[timer])
     
     useEffect(() => {
-        axios.post("http://localhost:5000/users/authenticate", q)
+        axios.post("/users/authenticate", q)
         .then(res => {
             const [status,info] = res.data
             if(status === "Authorized")
@@ -52,7 +52,7 @@ export default function MultipleChoice()
             }   
         })
         .catch(err => console.log(err))
-            axios.get("http://localhost:5000/admin/adminSettings")
+            axios.get("/admin/adminSettings")
                 .then(res => {setCookie('admin',res.data,{path: '/'})})
                 .catch(err => console.log(err))
     },[timer])
@@ -105,7 +105,7 @@ export default function MultipleChoice()
     }
     function handleMCSubmit()
     {
-        axios.post("http://localhost:5000/answer/retrieveanswers",{"frqID":0})
+        axios.post("/answer/retrieveanswers",{"frqID":0})
             .then(res => {
                 let ranswers = res.data[0].answers.split(',')
                 let correct = 0
@@ -117,14 +117,14 @@ export default function MultipleChoice()
                 }
                 let score = (correct*6) + (incorrect*-2)
 
-                axios.post("http://localhost:5000/users/addMCScore/"+cookies.data[0]._id, {
+                axios.post("/users/addMCScore/"+cookies.data[0]._id, {
                     "iScore":score, 
                     "iScoreinfo": (""+correct+","+incorrect+","+nanswered)
                 })
                 .then(() => console.log("Score Sent"))
                 .catch(err => console.log(err))
 
-                axios.get("http://localhost:5000/users/updateMCStatus/"+cookies.data[0]._id)
+                axios.get("/users/updateMCStatus/"+cookies.data[0]._id)
                     .then(() => {
                         history.push("/home")
                     } )
@@ -175,7 +175,7 @@ export default function MultipleChoice()
     }
     function startTimer()
     {
-        axios.get("http://localhost:5000/users/updateTime/"+cookies.data[0]._id)
+        axios.get("/users/updateTime/"+cookies.data[0]._id)
             .then(res => {
                 setTimer(new Date(res.data))})
             .catch(err => console.log(err))

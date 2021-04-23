@@ -16,7 +16,7 @@ export default function Log()
             "username" : username, 
             "password" : password
         }
-        axios.post("http://localhost:5000/users/authenticate", info)
+        axios.post("/users/authenticate", info)
             .then(res => {
                 const [status,info] = res.data
                 if(status === "Authorized")

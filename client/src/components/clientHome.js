@@ -21,7 +21,7 @@ export default function ClientHome()
     }
 
     useEffect(() => {
-        axios.post("http://localhost:5000/users/findTeam", {"team": cookies.data[0].team})
+        axios.post("/users/findTeam", {"team": cookies.data[0].team})
             .then(res => {
                 let arr = res.data
                 const teammates  = []
@@ -38,7 +38,7 @@ export default function ClientHome()
                 setteamnames(teammates)
             })
             .catch(err => console.log(err))
-            axios.post("http://localhost:5000/users/authenticate", q)
+            axios.post("/users/authenticate", q)
             .then(res => {
                 const [status,info] = res.data
                 console.log('here')
@@ -55,7 +55,7 @@ export default function ClientHome()
                 }   
             })
             .catch(err => console.log(err))
-            axios.post("http://localhost:5000/users/findTeam", {"team": cookies.data[0].team})
+            axios.post("/users/findTeam", {"team": cookies.data[0].team})
                     .then(res => {
                         let arr = res.data
                         console.log("here")
@@ -72,7 +72,7 @@ export default function ClientHome()
                     })
                     .catch(err => console.log(err))
 
-            axios.get("http://localhost:5000/admin/adminSettings")
+            axios.get("/admin/adminSettings")
                 .then(res => {setCookie('admin',res.data,{path: '/'})})
                 .catch(err => console.log(err))
     }, [])
