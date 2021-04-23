@@ -1,0 +1,183 @@
+#login-background
+{
+    background-color: #6b0f1a;
+    background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);
+    height: 100vh; 
+    text-align: center;
+
+    
+}
+#content-mc-after
+{
+    text-align: center;
+}
+#mcafter-message
+{
+    margin: 20px; 
+}
+#extrainfo
+{
+    font-size: 20px; 
+}
+#sepline
+{
+    border-top: 3px solid black;
+}
+#team-mates,#score-home
+{
+    border: 2px solid black;
+    margin: 10px; 
+    padding: 10px; 
+    text-align: left;
+    margin-bottom: 20px; 
+    font-family: 'Nunito Sans', sans-serif;
+    border-radius: 5px;
+
+}
+#client-home-body
+{
+    text-align: center;
+}
+#dragon-img
+{
+    height: 100px;
+}
+#signin
+{
+    background-color: black;
+    color:white; 
+    border: none;
+    padding: 5px; 
+    width: 100px;
+    border-radius: 5px; ;
+}
+#signin:hover
+{
+    border: 2px solid black; 
+    background-color: white;
+    color: black;
+}
+#signin:focus
+{
+    outline: none; 
+    box-shadow: none;
+}
+#wrapper
+{
+    height: 100%;
+}
+#l
+{
+    width: 250px; 
+    text-align: left;
+}
+#head
+{
+    font-family: 'Nunito Sans', sans-serif;
+    text-align: center;
+    margin-top: 15px;
+}
+#mctimer
+{
+    border:3px solid black; 
+    text-align: center;
+    padding: 10px; 
+}
+#selection
+{
+    border: 3px solid black; 
+}
+#sketchpad
+{
+    border:3px solid black; 
+    background-color: white;
+    height: 98%;
+    width: 100%;
+    
+}
+
+#sketch
+{
+    border: 3px solid black; 
+    background-color: #89cff0;
+    text-align: center;   
+}
+#login-fail
+{
+    display: hidden;
+    user-select: none;
+    font-size: 12px; 
+    color: white;
+}
+#question_styling
+{
+    font-size: 20px;
+}
+#co
+{   
+    height: 100vh
+}
+#submit-mc
+{
+    margin: 50px; 
+    text-align: center;
+    width: 85%; 
+    padding: 10px; 
+    background-color: black;
+    color: white;
+    border: none; 
+
+}
+#submit-mc:hover
+{
+    color: black; 
+    background-color: white;
+    border: 3px solid black;
+}
+
+#submit-mc:focus
+{
+    outline: none; 
+    box-shadow: none;
+}
+#login-box
+{
+    padding: 5px; 
+    border: 5px solid black; 
+    width: 400px; 
+    height: 240px; 
+    position: absolute; 
+    left: 50%; 
+    top: 50%;
+    margin-top: -100px; 
+    margin-left: -220px; 
+    border-radius: 10px;
+    text-align: center;
+}
+#mc-answerchoice
+{
+    margin: 40px; 
+}
+#mc-answerchoice-fr
+{
+    margin: 20px; 
+}
+input[type='radio'] {
+    transform: scale(3.5);
+}
+.navbar-brand
+{
+    font-size: 35px;
+    border: 2px solid white; 
+    padding: 5px; 
+    background-color: #6b0f1a;
+    background-image: linear-gradient(315deg, #6b0f1a 0%, #b91372 74%);
+}
+#info
+{
+    border: 3px solid black;
+    border-radius: 10px; 
+    text-align: center;
+    margin: 15px; 
+    padding: 10pxpx; 
+}
