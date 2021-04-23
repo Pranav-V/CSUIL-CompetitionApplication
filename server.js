@@ -10,9 +10,9 @@ console.log("here")
 app.use(cors())
 app.use(express.json())
 
-app.use(express.static(path.join(__dirname, 'client/build')))
+app.use(express.static(path.join(__dirname, 'index.html')))
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build'))
+    res.sendFile(path.join(__dirname, 'index.html'))
 })
 console.log('here')
 mongoose.connect("mongodb+srv://pnav:pdatabase@cluster0.jvhte.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
