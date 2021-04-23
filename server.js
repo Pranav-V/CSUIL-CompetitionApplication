@@ -1,6 +1,7 @@
 const express = require("express")
 const cors = require("cors")
 const mongoose = require("mongoose")
+const path = require("path")
 
 require("dotenv").config()
 
@@ -10,7 +11,12 @@ const port = process.env.PORT || 5000
 app.use(cors());
 app.use(express.json());
 
-mongoose.connect(uri, {useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true})
+app.use(express.static(path.join(__dirname, 'client/build')))
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build'))
+})
+
+mongoose.connect("mongodb+srv://pnav:pdatabase@cluster0.jvhte.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useCreateIndex: true, useUnifiedTopology: true, useNewUrlParser: true})
 
 const connection = mongoose.connection
 
