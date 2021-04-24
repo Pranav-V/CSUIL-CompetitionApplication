@@ -43,7 +43,7 @@ export default function ClientHome()
                 const [status,info] = res.data
                 if(status === "Authorized")
                 {
-                    setCookie('data',info)
+                    setCookie('data',info,{path: '/'})
                 }
                 else
                 {
@@ -73,7 +73,10 @@ export default function ClientHome()
             axios.get("/admin/adminSettings")
                 .then(res => {
                     console.log("here")
+                    console.log(res.data)
+                    console.log(res)
                     setCookie('admin',res.data,{path: '/'})})
+                        .then(() => console.log(cookies.admin))
                 .catch(err => console.log(err))
     }, [])
 
