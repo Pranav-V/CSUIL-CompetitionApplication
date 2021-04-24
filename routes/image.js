@@ -51,8 +51,10 @@ module.exports = (upload) => {
                 })
                 .catch(err => res.status(500).json(err));
         })
-        .get((req, res, next) => {
-            Image.find({})
+
+    imageRouter.route('/getImages').post((req, res, next) => {
+            console.log("boicheese")
+            Image.find()
                 .then(images => {
                     res.status(200).json({
                         success: true,
@@ -175,7 +177,7 @@ module.exports = (upload) => {
                     });
                 }
 
-                if (true || files[0].contentType === 'image/jpeg' || files[0].contentType === 'image/png' || files[0].contentType === 'image/svg+xml') {
+                if (files[0].contentType === 'image/jpeg' || files[0].contentType === 'image/png' || files[0].contentType === 'image/svg+xml') {
                     // render image to browser
                     gfs.openDownloadStreamByName(req.params.filename).pipe(res);
                 } else {

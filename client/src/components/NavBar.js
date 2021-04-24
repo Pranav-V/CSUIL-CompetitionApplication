@@ -17,7 +17,7 @@ export default function NavBar(props)
                     {props.current === "MC" ? <b className="nav-link" to="/">Multiple Choice</b> :<Link className="nav-link" to="/multiplechoice">Multiple Choice</Link>}  
                 </li>
                 <li className="nav-item">
-                    {props.current === "Written" ? <b className="nav-link" to="/">Written Response</b> :<Link className="nav-link" to="/">Written Response</Link>}
+                    {props.current === "Written" ? <b className="nav-link" to="/">Written Response</b> :<Link className="nav-link" to="/writtenresponse">Written Response</Link>}
                 </li>    
                 </ul>
             </div>  
