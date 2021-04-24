@@ -12,7 +12,7 @@ app.use(express.json())
 
 app.use(express.static(path.join(__dirname, 'client/build/')))
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client/build/'))
+    res.sendFile(path.join(__dirname, 'client/build/node'))
 })
 console.log('here')
 mongoose.connect("mongodb+srv://pnav:pdatabase@cluster0.jvhte.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})

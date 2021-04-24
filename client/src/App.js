@@ -2,7 +2,7 @@ import React, {useEffect} from "react"
 import {Route, Switch} from "react-router-dom"
 import clientHome from "./components/clientHome"
 import LogIn from "./components/LogIn"
-//import MultipleChoice from "./components/MultipleChoice"
+import MultipleChoice from "./components/MultipleChoice"
 export default function App()
 {
     return ( 
