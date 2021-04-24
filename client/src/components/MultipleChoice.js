@@ -161,7 +161,12 @@ export default function MultipleChoice()
                         <div className = "col-lg-6 col-md-6 col-sm-12" id="sketch">
                             <h3>Sketch Pad</h3>
                             <div id="sketchpad">
-
+                             <SketchField 
+                                    width='100%' 
+                                    height='100%' 
+                                    tool={Tools.Pencil}
+                                    lineColor='black'
+                                    lineWidth={3}/>
                             </div>                   
                         </div>
                     </div>
