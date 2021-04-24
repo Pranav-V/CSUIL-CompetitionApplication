@@ -55,23 +55,25 @@ export default function ClientHome()
             })
             .catch(err => console.log(err))
             axios.post("/users/findTeam", {"team": cookies.data[0].team})
-                    .then(res => {
-                        let arr = res.data
-                        var tempscore = 0
-                        for(let i=0; i<arr.length; i++)
+                .then(res => {
+                    let arr = res.data
+                    var tempscore = 0
+                    for(let i=0; i<arr.length; i++)
+                    {
+                        if(arr[i].iScore!=-500)
                         {
-                            if(arr[i].iScore!=-500)
-                            {
-                                tempscore += arr[i].iScore
-                                teamcount++;
-                            }
+                            tempscore += arr[i].iScore
+                            teamcount++;
                         }
-                        setteamscore(tempscore)
-                    })
-                    .catch(err => console.log(err))
+                    }
+                    setteamscore(tempscore)
+                })
+                .catch(err => console.log(err))
 
             axios.get("/admin/adminSettings")
-                .then(res => {setCookie('admin',res.data,{path: '/'})})
+                .then(res => {
+                    console.log("here")
+                    setCookie('admin',res.data,{path: '/'})})
                 .catch(err => console.log(err))
     }, [])
 
