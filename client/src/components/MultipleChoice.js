@@ -54,7 +54,7 @@ export default function MultipleChoice()
             }   
         })
         .catch(err => console.log(err))
-            axios.get("/admin/adminSettings")
+            axios.post("/admin/adminSettings")
                 .then(res => {setCookie('admin',res.data,{path: '/'})})
                 .catch(err => console.log(err))
     },[timer])
@@ -126,7 +126,7 @@ export default function MultipleChoice()
                 .then(() => console.log("Score Sent"))
                 .catch(err => console.log(err))
 
-                axios.get("/users/updateMCStatus/"+cookies.data[0]._id)
+                axios.post("/users/updateMCStatus/"+cookies.data[0]._id)
                     .then(() => {
                         history.push("/home")
                     } )
@@ -176,15 +176,13 @@ export default function MultipleChoice()
     }
     function startTimer()
     {
-        axios.get("/users/updateTime/"+cookies.data[0]._id)
+        axios.post("/users/updateTime/"+cookies.data[0]._id)
             .then(res => {
                 setTimer(new Date(res.data))})
             .catch(err => console.log(err))
     }
     function MC()
     {
-        console.log(cookies.data)
-        console.log(cookies.admin)
         if((!cookies.data[0].hasTakenMC && cookies.admin[0].MCtestEnabled))
         {
             var today = new Date(0)

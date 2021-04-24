@@ -26,7 +26,7 @@ router.route('/findTeam').post((req,res) => {
         .then(info => res.json(info))
         .catch(err => res.json(info))
 })
-router.route('/updateMCstatus/:id').get((req,res) => {
+router.route('/updateMCstatus/:id').post((req,res) => {
     User.findById(req.params.id)
         .then(user => {
             user.hasTakenMC = true
@@ -36,7 +36,7 @@ router.route('/updateMCstatus/:id').get((req,res) => {
         })
         .catch(err => res.status(400).json("Error: "+ err))
 })
-router.route('/updateTime/:id').get((req,res) => {
+router.route('/updateTime/:id').post((req,res) => {
     User.findById(req.params.id)
         .then(user => {
             const now = new Date()
