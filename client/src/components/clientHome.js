@@ -41,7 +41,6 @@ export default function ClientHome()
             axios.post("/users/authenticate", q)
             .then(res => {
                 const [status,info] = res.data
-                console.log('here')
                 if(status === "Authorized")
                 {
                     setCookie('data',info)
@@ -58,7 +57,6 @@ export default function ClientHome()
             axios.post("/users/findTeam", {"team": cookies.data[0].team})
                     .then(res => {
                         let arr = res.data
-                        console.log("here")
                         var tempscore = 0
                         for(let i=0; i<arr.length; i++)
                         {

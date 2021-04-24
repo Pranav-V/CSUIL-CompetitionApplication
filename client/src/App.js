@@ -11,7 +11,7 @@ export default function App()
             <Switch>
                 <Route path = "/" component={LogIn} exact/>
                 <Route path = "/home" component = {clientHome} />
-                <Route path = "/multiplechoice" component = {LogIn} />
+                <Route path = "/multiplechoice" component = {MultipleChoice} />
             </Switch>
         </div>
     )

@@ -3,7 +3,6 @@ import {useCookies} from "react-cookie"
 import axios from "axios"
 import {useHistory} from "react-router-dom"
 import NavBar from "./NavBar"
-//import {SketchField,Tools} from "react-sketch"
 
 export default function MultipleChoice()
 {

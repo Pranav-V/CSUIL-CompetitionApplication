@@ -2,6 +2,7 @@ const router = require("express").Router()
 let Admin = require("../models/admin.model")
 
 router.route('/adminSettings').get((req,res) => {
+    console.log("here")
     Admin.find()
         .then(info => res.json(info))
         .catch(err => res.status(400).json("Error" + err))

@@ -25,9 +25,7 @@ export default function Log()
                     removeCookie('data')
                     removeCookie('team')
                     setCookie("authorized",true,{path:'/'})
-                    console.log(info)
                     setCookie("data",info,{path:'/'})
-                    console.log(cookies.data)
                     history.push('/home')
                 }
                 else
