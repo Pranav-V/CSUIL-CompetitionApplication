@@ -8,6 +8,7 @@ export default function ClientHome()
     const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin'])
     const [teamnames, setteamnames] = useState([])
     const [teamscore, setteamscore] = useState(-500)
+    const [imageList, setImageList] = useState([])
     var teamcount = 0
     const history = useHistory()
     const q = {
@@ -21,6 +22,11 @@ export default function ClientHome()
     }
 
     useEffect(() => {
+        axios.get('/image/')
+            .then(response => {
+                setImageList(response.data.images );
+            })
+            .catch(err => alert(err));
         axios.post("/users/findTeam", {"team": cookies.data[0].team})
             .then(res => {
                 let arr = res.data
@@ -74,7 +80,10 @@ export default function ClientHome()
                 .then(res => setCookie('admin',res.data,{path: '/'}))
                 .catch(err => console.log(err))
     }, [])
-
+    function download()
+    {
+        
+    }
     const disect = cookies.data[0].iScoreinfo.split(',')
     return( 
         <div>
@@ -107,6 +116,21 @@ export default function ClientHome()
                                 <h3>Important Information: </h3>
                             </div>
                         </div>
+                    </div>
+                    <div className="ListImageContainer">
+                        {imageList.map((file) => (
+                            <div className="ListImage">
+                                <p className="ListImage__Caption">{file.caption}</p>
+                                <p className="ListImage__Date">{file.createdAt}</p>
+                                <img
+                                    src={'/image/image/' + file.filename}
+                                    alt="list-image"
+                                    className="ListImage__Image"
+                                />
+
+                                <button className="ListImage__Delete" onClick={() => this.deleteFile(file._id)}>Delete</button>
+                            </div>
+                        ))}
                     </div>
                 </div>
             </div>
