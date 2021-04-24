@@ -24,6 +24,8 @@ export default function ClientHome()
     useEffect(() => {
         axios.get('/image/')
             .then(response => {
+                console.log("here")
+                console.log(response.data.imageList)
                 setImageList(response.data.images );
             })
             .catch(err => alert(err));
@@ -118,7 +120,7 @@ export default function ClientHome()
                         </div>
                     </div>
                     {
-                        (imageList==[])?
+                        (imageList!=[])?
                         <div className="ListImageContainer">
                         {imageList.map((file) => (
                             <div className="ListImage">
