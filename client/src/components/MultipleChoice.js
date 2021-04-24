@@ -183,6 +183,8 @@ export default function MultipleChoice()
     }
     function MC()
     {
+        console.log(cookies.data)
+        console.log(cookies.admin)
         if((!cookies.data[0].hasTakenMC && cookies.admin[0].MCtestEnabled))
         {
             var today = new Date(0)
