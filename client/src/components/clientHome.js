@@ -71,12 +71,7 @@ export default function ClientHome()
                 .catch(err => console.log(err))
 
             axios.post("/admin/adminSettings")
-                .then(res => {
-                    console.log("here")
-                    console.log(res.data)
-                    console.log(res)
-                    setCookie('admin',res.data,{path: '/'})})
-                        .then(() => console.log(cookies.admin))
+                .then(res => setCookie('admin',res.data,{path: '/'}))
                 .catch(err => console.log(err))
     }, [])
 
