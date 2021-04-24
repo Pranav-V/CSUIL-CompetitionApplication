@@ -82,7 +82,7 @@ export default function ClientHome()
     }, [])
     function download()
     {
-        
+
     }
     const disect = cookies.data[0].iScoreinfo.split(',')
     return( 
@@ -117,7 +117,9 @@ export default function ClientHome()
                             </div>
                         </div>
                     </div>
-                    <div className="ListImageContainer">
+                    {
+                        (imageList==[])?
+                        <div className="ListImageContainer">
                         {imageList.map((file) => (
                             <div className="ListImage">
                                 <p className="ListImage__Caption">{file.caption}</p>
@@ -131,7 +133,9 @@ export default function ClientHome()
                                 <button className="ListImage__Delete" onClick={() => this.deleteFile(file._id)}>Delete</button>
                             </div>
                         ))}
-                    </div>
+                    </div>:null
+                    }
+                    
                 </div>
             </div>
         </div>
