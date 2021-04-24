@@ -25,8 +25,8 @@ export default function ClientHome()
         axios.get('/image/')
             .then(response => {
                 console.log("here")
-                console.log(response.data.imageList)
-                setImageList(response.data.images );
+                console.log(response.data.images)
+                setImageList(response.data.images);
             })
             .catch(err => alert(err));
         axios.post("/users/findTeam", {"team": cookies.data[0].team})
