@@ -3,6 +3,8 @@ import {useCookies} from "react-cookie"
 import axios from "axios"
 import {useHistory} from "react-router-dom"
 import NavBar from "./NavBar"
+import {SketchField,Tools} from './ReactSketch'
+
 
 export default function MultipleChoice()
 {
@@ -159,8 +161,8 @@ export default function MultipleChoice()
                         <div className = "col-lg-6 col-md-6 col-sm-12" id="sketch">
                             <h3>Sketch Pad</h3>
                             <div id="sketchpad">
-                            </div>
-                            
+
+                            </div>                   
                         </div>
                     </div>
                 </div>
