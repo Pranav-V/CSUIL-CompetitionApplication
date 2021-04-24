@@ -70,7 +70,7 @@ export default function ClientHome()
                 })
                 .catch(err => console.log(err))
 
-            axios.get("/admin/adminSettings")
+            axios.post("/admin/adminSettings")
                 .then(res => {
                     console.log("here")
                     console.log(res.data)
