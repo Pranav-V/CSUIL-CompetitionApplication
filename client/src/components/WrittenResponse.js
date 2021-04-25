@@ -15,7 +15,7 @@ export default function WrittenResponse() {
   )
     const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems'])
     const [timer, setTimer] = useState(new Date(cookies.data[0].timeStarted))
-    const [problemNames, setProblemNames] = useState(cookies.frqproblems!=null?cookies.frqproblems:"")
+    const [problemNames, setProblemNames] = useState(cookies.frqproblems!=null?cookies.frqproblems:[])
     const [timeLeft,settimeLeft] = useState("")
     const history = useHistory()
   
@@ -23,15 +23,18 @@ export default function WrittenResponse() {
     "username" : cookies.data[0].username, 
     "password" : cookies.data[0].password
     }
+    var statusInfo = []
 
-
-    var statusInfo = problemNames.map((name,index) => {
-        return(
-        <div key={name} id="frqlist">
-            <u>Problem {index+1} - {name}</u>
-            <p id="extrainfof">Attempts - 0  | Status - Unattempted | Points - 0</p>
-        </div>)
-    })
+    if(cookies.frqproblems!=null)
+    {
+        statusInfo = problemNames.map((name,index) => {
+            return(
+            <div key={name} id="frqlist">
+                <u>Problem {index+1} - {name}</u>
+                <p id="extrainfof">Attempts - 0  | Status - Unattempted | Points - 0</p>
+            </div>)
+        })
+    }
   useEffect(() => {
     axios.post("/users/authenticate", q)
         .then(res => {
