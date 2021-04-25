@@ -10,7 +10,8 @@ router.route('/adminSettings').post((req,res) => {
 router.route('/addAdminSettings').post((req,res) => {
 
     const newAdmin = new Admin({
-        "MCtestEnabled": false
+        "MCtestEnabled": false, 
+        "WrittentestEnabled":false
     })
     
     newAdmin.save()

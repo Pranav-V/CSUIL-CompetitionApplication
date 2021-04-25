@@ -18,7 +18,10 @@ export default function NavBar(props)
                 </li>
                 <li className="nav-item">
                     {props.current === "Written" ? <b className="nav-link" to="/">Written Response</b> :<Link className="nav-link" to="/writtenresponse">Written Response</Link>}
-                </li>    
+                </li> 
+                <li className="nav-item">
+                    {props.current === "Clarifications" ? <b className="nav-link" to="/">Clarifications</b> :<Link className="nav-link" to="/writtenresponse">Clarifications</Link>}
+                </li>   
                 </ul>
             </div>  
         </nav>

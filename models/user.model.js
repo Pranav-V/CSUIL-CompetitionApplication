@@ -9,6 +9,7 @@ const userSchema = new Schema({
     name: {type: String, required: true},
     isAdmin: {type:Boolean, required: true},
     hasTakenMC: {type:Boolean, required: true},
+    hasTakenWritten: {type:Boolean, required:true},
     timeStarted: {type:Date,required:true},
     iScore: {type:Number, required: true}, 
     iScoreinfo: {type:String}

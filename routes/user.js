@@ -66,6 +66,7 @@ router.route('/adduser').post((req,res) => {
     const name = req.body.name
     const isAdmin = req.body.isAdmin
     const hasTakenMC = false
+    const hasTakenWritten = false
     const timeStarted = new Date(0)
     const iScore = -500
     const iScoreinfo = ""
@@ -77,6 +78,7 @@ router.route('/adduser').post((req,res) => {
         name, 
         isAdmin,
         hasTakenMC,
+        hasTakenWritten,
         timeStarted,
         iScore,
         iScoreinfo
