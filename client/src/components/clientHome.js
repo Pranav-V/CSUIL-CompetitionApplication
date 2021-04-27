@@ -5,9 +5,9 @@ import {useHistory} from "react-router-dom"
 import NavBar from "./NavBar"
 export default function ClientHome()
 {
-    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin'])
+    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','teamscoremc'])
     const [teamnames, setteamnames] = useState([])
-    const [teamscore, setteamscore] = useState(-500)
+    const [teamscore, setteamscore] = useState(cookies.teamscoremc!=null?cookies.teamscoremc:-500)
     var teamcount = 0
     const history = useHistory()
     const q = {
@@ -66,11 +66,17 @@ export default function ClientHome()
                         }
                     }
                     setteamscore(tempscore)
+                    setCookie("teamscoremc",tempscore,{path:'/'})
                 })
                 .catch(err => console.log(err))
 
             axios.post("/admin/adminSettings")
                 .then(res => setCookie('admin',res.data,{path: '/'}))
+                .catch(err => console.log(err))
+            axios.post("/answer/getProblemNames",{"frqID":0})
+                .then(res => {
+                    setCookie('frqproblems',res.data,{path: '/'})
+                })
                 .catch(err => console.log(err))
     }, [])
     const disect = cookies.data[0].iScoreinfo.split(',')

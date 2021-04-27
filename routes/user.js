@@ -17,6 +17,42 @@ router.route('/authenticate').post((req,res) => {
         })
         .catch(err => res.status(400).json("Error" + err))
 })
+router.route('/getMap').post((req,res) => {
+    const query = {
+        "isAdmin" : false
+    }
+    User.find(query)
+        .then(info => {
+            let map = new Map()
+            for(var i=0; i<info.length; i++)
+            {
+                var cuser = info[i]
+                if(map.has(cuser.team))
+                {
+                    map.get(cuser.team).push(cuser.name)
+                }
+                else
+                {
+                    map.set(cuser.team,[cuser.name])
+                }
+                console.log(map)
+            }
+            var ret = ""
+            map.forEach((value, key) => {  
+                ret+="Team "+key +": "+value+"\n" 
+            });
+            res.json(ret)
+
+        })
+})
+router.route('/deleteAll').post((req,res) => {
+    const query = {
+        "isAdmin" : false
+    }
+    User.remove(query)
+        .then(() => res.json("Done"))
+        .catch(err => res.json(err))
+})
 router.route('/findTeam').post((req,res) => {
     const team = req.body.team
     const query = {
@@ -24,7 +60,7 @@ router.route('/findTeam').post((req,res) => {
     }
     User.find(query)
         .then(info => res.json(info))
-        .catch(err => res.json(info))
+        .catch(err => res.json(err))
 })
 router.route('/updateMCstatus/:id').post((req,res) => {
     User.findById(req.params.id)

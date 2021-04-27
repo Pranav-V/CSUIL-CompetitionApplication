@@ -25,6 +25,9 @@ connection.once('open', () => {
 const userRouter = require('./routes/user')
 const answerRouter = require('./routes/answer')
 const adminRouter = require('./routes/admin')
+const teamRouter = require('./routes/team')
+
+app.use('/team',teamRouter)
 app.use('/users',userRouter)
 app.use('/answer',answerRouter)
 app.use('/admin',adminRouter)

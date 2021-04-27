@@ -26,7 +26,15 @@ export default function Log()
                     removeCookie('team')
                     setCookie("authorized",true,{path:'/'})
                     setCookie("data",info,{path:'/'})
-                    history.push('/home')
+                    if(info[0].isAdmin)
+                    {
+                        history.push('/admin_home')
+                    }
+                    else
+                    {
+                        history.push('/home')
+
+                    }
                 }
                 else
                 {

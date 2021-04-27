@@ -11,7 +11,7 @@ import "prismjs/themes/prism.css"; //Example style, you can use another
 
 export default function WrittenResponse() {
   const [code, setCode] = React.useState(
-    `//Paste your code here\n`
+    `//Paste your Java code here\n`
   )
     const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems'])
     const [timer, setTimer] = useState(new Date(cookies.data[0].timeStarted))
@@ -80,13 +80,13 @@ export default function WrittenResponse() {
                                 <span>
                                     <label style={{float:"left"}} htmlFor="cars">Select Question: </label> 
                     
-                                    <select id="cars" name="cars" style={{float:"left"}}>
+                                    <select  id="question-select" name="cars" style={{float:"left"}}>
                                         <option value="volvo">Volvo</option>
                                         <option value="saab">Saab</option>
                                         <option value="fiat">Fiat</option>
                                         <option value="audi">Audi</option>
                                     </select>
-                                    <button style={{float:"right"}}> Submit</button>
+                                    <button id="submit-fr" style={{float:"right"}}> Submit</button>
                                 </span>
                                 <br/>
                                 <br/>

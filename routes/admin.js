@@ -6,12 +6,42 @@ router.route('/adminSettings').post((req,res) => {
         .then(info => res.json(info))
         .catch(err => res.status(400).json("Error" + err))
 })
-
+router.route('/updateCount/').post((req,res) => {
+    Admin.find()
+        .then(info => {
+            info[0].currentTeamCount +=1
+            info[0].save()
+                .then(() => res.json("updated"))
+                .catch(err => res.json(err))
+        })
+        .catch(err => res.json(err))
+})
+router.route('/clearCount/').post((req,res) => {
+    Admin.find()
+        .then(info => {
+            info[0].currentTeamCount =0
+            info[0].save()
+                .then(() => res.json("updated"))
+                .catch(err => res.json(err))
+        })
+        .catch(err => res.json(err))
+})
+router.route('/updateMC/').post((req,res) => {
+    Admin.find()
+        .then(info => {
+            info[0].MCtestEnabled = !info[0].MCtestEnabled
+            info[0].save()
+                .then(() => res.json("updated"))
+                .catch(err => res.json(err))
+        })
+        .catch(err => res.json(err))
+})
 router.route('/addAdminSettings').post((req,res) => {
 
     const newAdmin = new Admin({
         "MCtestEnabled": false, 
-        "WrittentestEnabled":false
+        "WrittentestEnabled":false,
+        "currentTeamCount":0
     })
     
     newAdmin.save()
