@@ -6,8 +6,10 @@ import AdminBar from "./AdminBar"
 
 export default function AdminHome()
 {
-    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','teamscoremc','currentTeams'])
+    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','teamscoremc','currentTeams','currentAnswers','frnames'])
     const [content,setcontent] = useState(cookies.currentTeams!=null?cookies.currentTeams:"")
+    const [mcAnswers,setmcAnswers] = useState(cookies.currentAnswers!=null?cookies.currentAnswers:"")
+    const [frNames,setfrNames] = useState(cookies.frnames!=null?cookies.frnames:"")
     const q = {
         "username" : cookies.data[0].username, 
         "password" : cookies.data[0].password
@@ -35,6 +37,15 @@ export default function AdminHome()
             .then(res => setCookie('admin',res.data,{path: '/'}))
             .catch(err => console.log(err))
         
+        axios.post("/answer/retrieveanswers",{"frqID":"0"})
+            .then(res => {
+                setCookie('currentAnswers',res.data[0].answers,{path: '/'})
+                setCookie('frnames',res.data[0].frqNames,{path:'/'})
+                setfrNames(res.data[0].frqNames)
+                setmcAnswers(res.data[0].answers)
+            })
+            .catch(err => console.log(err))
+        
         axios.post("/users/getMap")
             .then(res => {
                 setCookie('currentTeams',res.data,{path: '/'})
@@ -45,7 +56,7 @@ export default function AdminHome()
     function deleteInfo()
     {
         var retInfo = document.getElementById("team-adder").value
-        if(!retInfo.includes("#!#!"))
+        if(!retInfo.includes("#!#"))
         {
             alert("Lack Database Credentials")
             return
@@ -102,6 +113,36 @@ export default function AdminHome()
             .then(() => console.log("updated"))
             .catch(err => console.log(err))
     }
+    function addMCInfo()
+    {
+        var retInfo = document.getElementById("mc-adder").value
+        if(!retInfo.includes("#!# "))
+        {
+            alert("Lack Database Credentials")
+            return
+        }
+        var answerData = retInfo.split(" ")[1]
+        axios.post('/answer/changeMC', {"answers":answerData})
+            .then(() => {
+                window.location.reload()
+            })
+            .catch(err => console.log(err))
+    }
+    function addFRQNames()
+    {
+        var retInfo = document.getElementById("question-adder").value
+        if(!retInfo.includes("#!# "))
+        {
+            alert("Lack Database Credentials")
+            return
+        }
+        var answerData = retInfo.split(" ")[1]
+        axios.post('/answer/changeFRQ', {"frqNames":answerData})
+            .then(() => {
+                window.location.reload()
+            })
+            .catch(err => console.log(err))
+    }
     return ( 
         <div>
             <AdminBar current = "Home"/>
@@ -139,6 +180,9 @@ export default function AdminHome()
                     <div className = "row">
                        <div className = "col-lg-12 col-md-12 col-sm-12">
                             <div  className = "row" id="manage-teams">
+                                <div className="col-lg-12 col-md-12 col-sm-12">
+                                    <h3><u>Manage Teams</u></h3>
+                                </div>
                                 <div className = "col-lg-6 col-md-6 col-sm-12">
                                     <textarea spellCheck="false" value={content} readOnly disabled id="team-displayer"/>
                                 </div>
@@ -160,8 +204,20 @@ export default function AdminHome()
                         </div>
                     </div>
                     <div className = "row">
-                        <div className = "col-lg-12 col-md-12 col-sm-12">
+                        <div className = "col-lg-6 col-md-6 col-sm-12">
                             <div id = "current-answers">
+                                <h3><u>Change MC Answers</u></h3>
+                                <textarea spellCheck="false" value={mcAnswers} readOnly disabled id="mc-answers"/>
+                                <textarea spellCheck="false" id="mc-adder"/>
+                                <button onClick={addMCInfo} id="submit-fr">Submit</button>
+                            </div>
+                        </div>
+                        <div className = "col-lg-6 col-md-6 col-sm-12">
+                            <div id = "current-answers">
+                                <h3><u>Change WR Names</u></h3>
+                                <textarea spellCheck="false" value={frNames} readOnly disabled id="question-display"/>
+                                <textarea spellCheck="false" id="question-adder"/>
+                                <button onClick={addFRQNames} id="submit-fr">Submit</button>
                             </div>
                         </div>
                     </div>

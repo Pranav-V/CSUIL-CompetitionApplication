@@ -19,6 +19,11 @@
     width: 100%; 
     height: 200px; 
 }
+#mc-answers,#mc-adder,#question-display,#question-adder
+{
+    width: 100%; 
+    height: 100px
+}
 #content-mc-after
 {
     text-align: center;
