@@ -26,11 +26,13 @@ const userRouter = require('./routes/user')
 const answerRouter = require('./routes/answer')
 const adminRouter = require('./routes/admin')
 const teamRouter = require('./routes/team')
+const questionRouter = require("./routes/question")
 
 app.use('/team',teamRouter)
 app.use('/users',userRouter)
 app.use('/answer',answerRouter)
 app.use('/admin',adminRouter)
+app.use('/question',questionRouter)
 
 app.listen(port, () => {
     console.log(`Server is running on port: ${port}`)

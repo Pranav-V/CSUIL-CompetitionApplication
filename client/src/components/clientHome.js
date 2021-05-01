@@ -5,11 +5,15 @@ import {useHistory} from "react-router-dom"
 import NavBar from "./NavBar"
 export default function ClientHome()
 {
-    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','teamscoremc'])
+    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','teamscoremc','teamscorewr','frqstatus'])
     const [teamnames, setteamnames] = useState([])
     const [teamscore, setteamscore] = useState(cookies.teamscoremc!=null?cookies.teamscoremc:-500)
     var teamcount = 0
     const history = useHistory()
+    if(cookies.authorized==null)
+    {
+        history.push("/")
+    }
     const q = {
         "username" : cookies.data[0].username, 
         "password" : cookies.data[0].password
@@ -53,6 +57,9 @@ export default function ClientHome()
                 }   
             })
             .catch(err => console.log(err))
+            axios.post("/team/getscore",{"team":cookies.data[0].team})
+                .then(res => setCookie("teamscorewr",res.data,{path:'/'}))
+                .catch(err => console.log(err))
             axios.post("/users/findTeam", {"team": cookies.data[0].team})
                 .then(res => {
                     let arr = res.data
@@ -78,6 +85,10 @@ export default function ClientHome()
                     setCookie('frqproblems',res.data,{path: '/'})
                 })
                 .catch(err => console.log(err))
+            axios.post("/team/getTeamInfo",{"team":cookies.data[0].team})
+                .then(res => {
+                    setCookie('frqstatus',res.data,{path:'/'})
+                })
     }, [])
     const disect = cookies.data[0].iScoreinfo.split(',')
     return( 
@@ -99,9 +110,9 @@ export default function ClientHome()
                             <div id = "score-home">
                                 <h3>Multiple Choice Score (Individual): {cookies.data[0].iScore === -500?"_____":cookies.data[0].iScore} <b id="extrainfo">{cookies.data[0].iScore !== -500?"   [Correct-"+ disect[0]+", Incorrect-"+disect[1]+", Unattempted-"+disect[2]+"]":null}</b></h3>
                                 <h3>Multiple Choice Score (Team): {cookies.data[0].iScore === -500?"_____":teamscore}</h3>
-                                <h3>Written Response Score (Team): {cookies.data[0].iScore === -500?"_____":cookies.data[0].iScore}</h3>
+                                <h3>Written Response Score (Team): {cookies.admin!=null?(!cookies.admin[0].WrittentestEnabled?"_____":cookies.teamscorewr):"_____"}</h3>
                                 <hr id = "sepline" />
-                                <h3>= Contest Score (Team): {cookies.data[0].iScore === -500?"_____":cookies.data[0].iScore}</h3>
+                                <h3>= Contest Score (Team): {!(cookies.data[0].iScore !== -500 && cookies.admin[0].WrittentestEnabled)?"_____":(parseInt(teamscore)+parseInt(cookies.teamscorewr))}</h3>
                             </div>
                         </div>
                     </div>

@@ -14,6 +14,10 @@ export default function MultipleChoice()
     const [timeLeft,settimeLeft] = useState("")
     const [sans,setsans] = useState(new Array(40))
     const history = useHistory()
+    if(cookies.authorized==null)
+    {
+        history.push("/")
+    }
     var t
     const arr = Array.from({length: 40}, (_, index) => index + 1);
     const q = {

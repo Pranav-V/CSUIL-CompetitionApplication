@@ -2,31 +2,81 @@ const router = require("express").Router()
 let Team = require("../models/team.model")
 
 router.route('/createteam').post((req,res) => {
-    const teamNumber = parseInt(req.body.number)
-
+    const team = parseInt(req.body.number)
+    const frqAnswers = {
+        "0":[0,"Unattempted",0],
+        "1":[0,"Unattempted",0],
+        "2":[0,"Unattempted",0],
+        "3":[0,"Unattempted",0],
+        "4":[0,"Unattempted",0],
+        "5":[0,"Unattempted",0],
+        "6":[0,"Unattempted",0],
+        "7":[0,"Unattempted",0],
+        "8":[0,"Unattempted",0],
+        "9":[0,"Unattempted",0],
+        "10":[0,"Unattempted",0],
+        "11":[0,"Unattempted",0],
+    }
+    const wScore = 0
+    console.log("hereTeam")
     const newTeam = new Team({
-        teamNumber
+        team,
+        frqAnswers,
+        wScore
     })
 
     newTeam.save()
         .then(() => res.json("Created"))
         .catch(err => res.json(err))
-    /*
-    let info = req.body.info
-    const regex = /\d/
-    if(!regex.test(info) || info.length()<7 || info(0)!="(" || info(info.length()-1)!=")")
-    {
-        res.json("Incorrect Formatting")
+})
+router.route('/getscore').post((req,res) => {
+    const query = {
+        "team":req.body.team
     }
-    const extract = info.splice(1,info.length()-1)
-    const iterate = extract.split(",")
-    const isDigit = 
-    const newTeam = new Team({
+    Team.find(query)
+        .then(data => res.json(data[0].wScore))
+        .catch(err => res.json(err))
+})
+router.route('/delete').post((req,res) => {
+    Team.deleteMany()
+        .then(() => res.json("complete"))
+        .catch(err => res.json(err))
+})
+router.route('/changeStatus').post((req,res) => {
+    const problem = req.body.problem
+    const status = req.body.status
+    console.log("here")
+    const query = {
+        "team":req.body.team
+    }
 
-    })
-    Admin.find()
-        .then(info => res.json(info))
-        .catch(err => res.status(400).json("Error" + err))
-        */
+    Team.find(query)
+        .then(info => {
+            const copy = JSON.parse(JSON.stringify(info[0].frqAnswers))
+            copy[problem][1] = status
+            if(status=="Correct")
+            {
+                copy[problem][2] = (copy[problem][0]*-5)+60
+                info[0].wScore += copy[problem][2] 
+            }
+            if(status=="Incorrect" || status=="Runtime Error" || status=="Compile Time Error")
+            {
+                copy[problem][0] = copy[problem][0] + 1
+            }
+            info[0].frqAnswers = copy
+            info[0].save()
+                .then(() => {console.log(info[0]);res.json("success")})
+                .catch(err => res.json(err))
+        })
+        .catch(err => res.json(err))
+})
+router.route('/getTeamInfo/').post((req,res) => {
+    const query = {
+        "team":req.body.team
+    }
+
+    Team.find(query)
+        .then(info => res.json(info[0].frqAnswers))
+        .catch(err => res.json(err))
 })
 module.exports = router

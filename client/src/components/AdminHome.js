@@ -6,16 +6,22 @@ import AdminBar from "./AdminBar"
 
 export default function AdminHome()
 {
-    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','teamscoremc','currentTeams','currentAnswers','frnames'])
+    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','admin','frqproblems','currentTeams','currentAnswers','frnames'])
+    const [mcCheck,setmcCheck] = useState(false)
+    const [frCheck,setfrCheck] = useState(false)
     const [content,setcontent] = useState(cookies.currentTeams!=null?cookies.currentTeams:"")
     const [mcAnswers,setmcAnswers] = useState(cookies.currentAnswers!=null?cookies.currentAnswers:"")
     const [frNames,setfrNames] = useState(cookies.frnames!=null?cookies.frnames:"")
+    
+    const history = useHistory()
+    if(cookies.authorized==null)
+    {
+        history.push("/")
+    }
     const q = {
         "username" : cookies.data[0].username, 
         "password" : cookies.data[0].password
     }
-    const history = useHistory()
-
     useEffect(() => {
         axios.post("/users/authenticate", q)
             .then(res => {
@@ -33,8 +39,16 @@ export default function AdminHome()
                 }   
             })
             .catch(err => console.log(err))
+        axios.post("/answer/getProblemNames",{"frqID":0})
+            .then(res => {
+                setCookie('frqproblems',res.data,{path: '/'})
+            })
+            .catch(err => console.log(err))
         axios.post("/admin/adminSettings")
-            .then(res => setCookie('admin',res.data,{path: '/'}))
+            .then(res => {
+                setmcCheck(res.data[0].MCtestEnabled)
+                setfrCheck(res.data[0].WrittentestEnabled)
+                setCookie('admin',res.data,{path:'/'})})
             .catch(err => console.log(err))
         
         axios.post("/answer/retrieveanswers",{"frqID":"0"})
@@ -51,6 +65,9 @@ export default function AdminHome()
                 setCookie('currentTeams',res.data,{path: '/'})
                 setcontent(res.data)
             })
+        axios.post("/admin/adminSettings")
+            .then(res => setCookie('admininfo',res.data,{path:'/'}))
+            .catch(err => console.log(err))
         
     }, [])
     function deleteInfo()
@@ -65,10 +82,18 @@ export default function AdminHome()
             .then(() => {
                 console.log("worked")
                 axios.post("/admin/clearCount")
-                    .then(() => window.location.reload())
+                    .then(() => {
+                        axios.post("/question/delete")
+                        .then(() => window.location.reload())
+                        .catch(err => console.log(err))
+                    })
                     .catch(err => console.log(err))
             })
-            .catch(err => console.log(err))  
+            .catch(err => console.log(err))
+
+        axios.post("/team/delete")
+            .then(() => console.log("success"))
+            .catch(err => console.log(err))
     }
     function addInfo()
     {
@@ -96,7 +121,7 @@ export default function AdminHome()
 
             }
             promises.push(axios.post("/team/createteam",{
-                "teamNumber" : currentCount
+                "number" : currentCount
             }))
             
             currentCount++
@@ -107,9 +132,17 @@ export default function AdminHome()
             window.location.reload()
         })   
     }
-    function changeMC()
+    function changeMC(event)
     {
+        setmcCheck(!mcCheck)
         axios.post("/admin/updateMC")
+            .then(() => console.log("updated"))
+            .catch(err => console.log(err))
+    }
+    function changeFR(event)
+    {
+        setfrCheck(!frCheck)
+        axios.post("/admin/updateFR")
             .then(() => console.log("updated"))
             .catch(err => console.log(err))
     }
@@ -159,7 +192,7 @@ export default function AdminHome()
                                 <span>
                                     <b>Multiple Choice Enabled: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</b>
                                     <label className="switch">
-                                        <input onClick = {changeMC} type="checkbox"/>
+                                        <input checked = {mcCheck} onChange = {changeMC} type="checkbox"/>
                                         <span className="slider round"/>
                                     </label>
                                 </span>
@@ -167,7 +200,7 @@ export default function AdminHome()
                                 <span>
                                     <b>Written Response Enabled:&nbsp;&nbsp; </b>
                                     <label className="switch">
-                                        <input type="checkbox"/>
+                                        <input checked = {frCheck} onChange = {changeFR} type="checkbox"/>
                                         <span className="slider round"/>
                                     </label>
                                 </span>

@@ -11,10 +11,10 @@ export default function AdminBar(props)
             <div className="collapse navbar-collapse" id="collapsibleNavbar">
                 <ul className="navbar-nav">
                 <li className="nav-item">
-                    {props.current === "Home" ? <b className="nav-link" to="/">General Settings</b> :<Link className="nav-link" to="/home">General Settings</Link>}
+                    {props.current === "Home" ? <b className="nav-link" to="/">General Settings</b> :<Link className="nav-link" to="/admin_home">General Settings</Link>}
                 </li>
                 <li className="nav-item">
-                    {props.current === "MC" ? <b className="nav-link" to="/">Written Response Grading</b> :<Link className="nav-link" to="/multiplechoice">Written Response Grading</Link>}  
+                    {props.current === "WRGrade" ? <b className="nav-link" to="/">Written Response Grading</b> :<Link className="nav-link" to="/admin_wrgrading">Written Response Grading</Link>}  
                 </li>
                 <li className="nav-item">
                     {props.current === "Written" ? <b className="nav-link" to="/">Rankings</b> :<Link className="nav-link" to="/writtenresponse">Rankings</Link>}

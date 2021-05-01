@@ -13,25 +13,27 @@ export default function WrittenResponse() {
   const [code, setCode] = React.useState(
     `//Paste your Java code here\n`
   )
-    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems'])
+    const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','frqstatus'])
     const [timer, setTimer] = useState(new Date(cookies.data[0].timeStarted))
     const [problemNames, setProblemNames] = useState(cookies.frqproblems!=null?cookies.frqproblems:[])
     const [timeLeft,settimeLeft] = useState("")
     const history = useHistory()
-  
+    if(cookies.authorized==null)
+    {
+        history.push("/")
+    }
     const q = {
     "username" : cookies.data[0].username, 
     "password" : cookies.data[0].password
     }
     var statusInfo = []
-
-    if(cookies.frqproblems!=null)
+    if(cookies.frqproblems!=null && cookies.frqstatus!=null)
     {
         statusInfo = problemNames.map((name,index) => {
             return(
             <div key={name} id="frqlist">
                 <u>Problem {index+1} - {name}</u>
-                <p id="extrainfof">Attempts - 0  | Status - Unattempted | Points - 0</p>
+                <p id="extrainfof">Attempts - {cookies.frqstatus[index][0]}  | Status - {cookies.frqstatus[index][1]} | Points - {cookies.frqstatus[index][2]}</p>
             </div>)
         })
     }
@@ -60,9 +62,43 @@ export default function WrittenResponse() {
             setCookie('frqproblems',res.data,{path: '/'})
         })
         .catch(err => console.log(err))
+    axios.post("/team/getTeamInfo",{"team":cookies.data[0].team})
+        .then(res => {
+            setCookie('frqstatus',res.data,{path:'/'})
+        })
+        .catch(err => console.log(err))
 },[timer])
-  function Written()
-  {
+
+    function submitFR()
+    {
+        if(cookies.frqstatus[document.getElementById("question-select").value][1]=="Correct")
+        {
+            alert("You have already gotten this question correct.")
+            return
+        }
+        if(cookies.frqstatus[document.getElementById("question-select").value][0]>=12)
+        {
+            alert("You have exceeded that maximum attempts for this problem.")
+            return
+        }
+        var info = [code,document.getElementById("question-select").value,cookies.data[0].team]
+        axios.post("/question/addtoFRQ",{"info":info})
+            .then(() => {
+                alert("Submitted")
+            })
+            .catch(err => console.log(err))
+        const q =  {
+                "problem": document.getElementById("question-select").value, 
+                "status": "Grading...",
+                "team":cookies.data[0].team
+            }
+        axios.post("/team/changeStatus",q)
+            .then(res => window.location.reload())
+            .catch(err => console.log(err))
+    }
+    
+    function Written()
+    {
       if((!cookies.data[0].hasTakenWritten && cookies.admin[0].WrittentestEnabled))
       {
           return ( 
@@ -79,21 +115,27 @@ export default function WrittenResponse() {
                             <div id="frqsub-area">
                                 <span>
                                     <label style={{float:"left"}} htmlFor="cars">Select Question: </label> 
-                    
                                     <select  id="question-select" name="cars" style={{float:"left"}}>
-                                        <option value="volvo">Volvo</option>
-                                        <option value="saab">Saab</option>
-                                        <option value="fiat">Fiat</option>
-                                        <option value="audi">Audi</option>
+                                        <option value="0">{problemNames.length!=0?problemNames[0]:""}</option>
+                                        <option value="1">{problemNames.length!=0?problemNames[1]:""}</option>
+                                        <option value="2">{problemNames.length!=0?problemNames[2]:""}</option>
+                                        <option value="3">{problemNames.length!=0?problemNames[3]:""}</option>
+                                        <option value="4">{problemNames.length!=0?problemNames[4]:""}</option>
+                                        <option value="5">{problemNames.length!=0?problemNames[5]:""}</option>
+                                        <option value="6">{problemNames.length!=0?problemNames[6]:""}</option>
+                                        <option value="7">{problemNames.length!=0?problemNames[7]:""}</option>
+                                        <option value="8">{problemNames.length!=0?problemNames[8]:""}</option>
+                                        <option value="9">{problemNames.length!=0?problemNames[9]:""}</option>
+                                        <option value="10">{problemNames.length!=0?problemNames[10]:""}</option>
+                                        <option value="11">{problemNames.length!=0?problemNames[11]:""}</option>
                                     </select>
-                                    <button id="submit-fr" style={{float:"right"}}> Submit</button>
+                                    <button onClick={submitFR} id="submit-fr" style={{float:"right"}}> Submit</button>
                                 </span>
                                 <br/>
                                 <br/>
                                 <Editor
                                     value={code}
                                     onValueChange={(code) => {
-                                        console.log(code)
                                         setCode(code)}}
                                     highlight={(code) => highlight(code, languages.js)}
                                     padding={10}
