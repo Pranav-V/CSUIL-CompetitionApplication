@@ -17,9 +17,10 @@ router.route('/addquestionSettings').post((req,res) => {
         .catch(err => res.status(400).json("Error" + err))
 })
 router.route('/delete').post((req,res) => {
-    Question.remove()
-        .then(() => res.json("complete"))
-        .catch(err => res.json(err))
+    Question.find()
+        .then(info => {
+            info[0].FRQ = []
+        })
 })
 router.route('/deleteQ').post((req,res) => {
     const i = req.body.index
