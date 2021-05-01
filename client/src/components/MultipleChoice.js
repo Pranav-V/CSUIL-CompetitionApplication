@@ -10,7 +10,7 @@ export default function MultipleChoice()
 {
     
     const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin'])
-    const [timer, setTimer] = useState(new Date(cookies.data[0].timeStarted))
+    const [timer, setTimer] = useState(new Date(cookies.data!=null?cookies.data[0].timeStarted:0))
     const [timeLeft,settimeLeft] = useState("")
     const [sans,setsans] = useState(new Array(40))
     const history = useHistory()
