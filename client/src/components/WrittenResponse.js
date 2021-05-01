@@ -14,7 +14,6 @@ export default function WrittenResponse() {
     `//Paste your Java code here\n`
   )
     const [cookies, setCookie,removeCookie] = useCookies(['authorized','data','team','admin','frqproblems','frqstatus'])
-    const [timer, setTimer] = useState(new Date(cookies.data[0].timeStarted))
     const [problemNames, setProblemNames] = useState(cookies.frqproblems!=null?cookies.frqproblems:[])
     const [timeLeft,settimeLeft] = useState("")
     const history = useHistory()
@@ -67,7 +66,7 @@ export default function WrittenResponse() {
             setCookie('frqstatus',res.data,{path:'/'})
         })
         .catch(err => console.log(err))
-},[timer])
+},[])
 
     function submitFR()
     {
