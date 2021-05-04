@@ -130,6 +130,10 @@
     width: 250px; 
     text-align: left;
 }
+#ranking-content
+{
+    text-align: center;
+}
 #frqsub-area
 {
     text-align: center;
@@ -343,3 +347,5 @@ input[type='radio'] {
   .slider.round:before {
     border-radius: 50%;
   }
+
+  

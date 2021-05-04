@@ -6,6 +6,7 @@ import adminHome from "./components/AdminHome"
 import MultipleChoice from "./components/MultipleChoice"
 import writtenResponse from "./components/WrittenResponse"
 import WRGrading from "./components/WRGrading"
+import Rankings from "./components/Rankings"
 export default function App()
 {
     return ( 
@@ -18,6 +19,7 @@ export default function App()
                 <Route path = "/writtenresponse" component = {writtenResponse} />
                 <Route path = "/admin_home" component = {adminHome} />
                 <Route path = "/admin_wrgrading" component = {WRGrading} />
+                <Route path = "/admin_rankings" component = {Rankings} />
             </Switch>
         </div>
     )

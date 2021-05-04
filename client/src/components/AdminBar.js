@@ -17,7 +17,7 @@ export default function AdminBar(props)
                     {props.current === "WRGrade" ? <b className="nav-link" to="/">Written Response Grading</b> :<Link className="nav-link" to="/admin_wrgrading">Written Response Grading</Link>}  
                 </li>
                 <li className="nav-item">
-                    {props.current === "Written" ? <b className="nav-link" to="/">Rankings</b> :<Link className="nav-link" to="/writtenresponse">Rankings</Link>}
+                    {props.current === "Written" ? <b className="nav-link" to="/">Rankings</b> :<Link className="nav-link" to="/admin_rankings">Rankings</Link>}
                 </li>    
                 </ul>
             </div>  
