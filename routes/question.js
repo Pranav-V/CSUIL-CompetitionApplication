@@ -20,7 +20,11 @@ router.route('/delete').post((req,res) => {
     Question.find()
         .then(info => {
             info[0].FRQ = []
+            info[0].save()
+                .then(() => res.json("updated"))
+                .catch(err => res.json(err))
         })
+        .catch(err => res.json(err))
 })
 router.route('/deleteQ').post((req,res) => {
     const i = req.body.index

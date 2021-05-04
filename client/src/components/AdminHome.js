@@ -80,20 +80,21 @@ export default function AdminHome()
         }
         axios.post("/users/deleteAll")
             .then(() => {
-                console.log("worked")
                 axios.post("/admin/clearCount")
                     .then(() => {
                         axios.post("/question/delete")
-                        .then(() => window.location.reload())
+                        .then(() => {
+                            axios.post("/team/delete")
+                                .then(() => {
+                                    window.location.reload()
+                                })
+                                .catch(err => console.log(err))
+                        })
                         .catch(err => console.log(err))
                     })
                     .catch(err => console.log(err))
             })
-            .catch(err => console.log(err))
-
-        axios.post("/team/delete")
-            .then(() => console.log("success"))
-            .catch(err => console.log(err))
+            .catch(err => console.log(err))      
     }
     function addInfo()
     {
