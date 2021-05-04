@@ -10,20 +10,25 @@ export default function ClientHome()
     const [teamscore, setteamscore] = useState(cookies.teamscoremc!=null?cookies.teamscoremc:-500)
     var teamcount = 0
     const history = useHistory()
-    if(cookies.authorized==null)
+    if(cookies.authorized==null || cookies.data==null)
     {
         history.push("/")
-    }
-    const q = {
-        "username" : cookies.data[0].username, 
-        "password" : cookies.data[0].password
     }
     if(!cookies.authorized)
     {   
         history.push('/')
 
     }
+    const q = {
+        "username" : cookies.data!=null?cookies.data[0].username:"", 
+        "password" : cookies.data!=null?cookies.data[0].password:""
+    }
+    
     useEffect(() => {
+        if(cookies.data==null)
+        {
+            return
+        }
         axios.post("/users/findTeam", {"team": cookies.data[0].team})
             .then(res => {
                 let arr = res.data
@@ -90,13 +95,18 @@ export default function ClientHome()
                     setCookie('frqstatus',res.data,{path:'/'})
                 })
     }, [])
-    const disect = cookies.data[0].iScoreinfo.split(',')
+    const disect = cookies.data!=null?cookies.data[0].iScoreinfo.split(','):[]
+    if(cookies.data==null || cookies.authorized==null)
+    {
+        return <div></div>
+    }
+
     return( 
         <div>
             <NavBar current = "Home"/>
             <div id="client-home-body">
                 <br/>
-                <h4>Hey {cookies.data[0].name}! Ready to get coding? 😎</h4>
+                <h4>Hey {cookies.data!=null?cookies.data[0].name:""}! Ready to get coding? 😎</h4>
                 <div className = "container-fluid">
                     <div className = "row">
                         <div className = "col-lg-12 col-md-12 col-sm-12">

@@ -16,11 +16,13 @@ export default function AdminHome()
     const history = useHistory()
     if(cookies.authorized==null)
     {
+        console.log("here")
         history.push("/")
     }
+    
     const q = {
-        "username" : cookies.data[0].username, 
-        "password" : cookies.data[0].password
+        "username" : cookies.data!=null?cookies.data[0].username:"", 
+        "password" : cookies.data!=null?cookies.data[0].password:""
     }
     useEffect(() => {
         axios.post("/users/authenticate", q)
@@ -182,7 +184,7 @@ export default function AdminHome()
             <AdminBar current = "Home"/>
             <div id="client-home-body">
                 <br/>
-                <h4>Hey {cookies.data[0].name}! Ready to grade? 😃</h4>
+                <h4>Hey {cookies.data!=null?cookies.data[0].name:""}! Ready to grade? 😃</h4>
                 <div className = "container-fluid">
                     <div className = "row">
                         <div className = "col-lg-3 col-md-3 col-sm-0">

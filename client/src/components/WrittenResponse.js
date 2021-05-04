@@ -22,8 +22,8 @@ export default function WrittenResponse() {
         history.push("/")
     }
     const q = {
-    "username" : cookies.data[0].username, 
-    "password" : cookies.data[0].password
+    "username" : cookies.data!=null?cookies.data[0].username:"", 
+    "password" : cookies.data!=null?cookies.data[0].password:""
     }
     var statusInfo = []
     if(cookies.frqproblems!=null && cookies.frqstatus!=null)
@@ -37,6 +37,10 @@ export default function WrittenResponse() {
         })
     }
   useEffect(() => {
+    if(cookies.data==null || cookies.authorized==null)
+    {
+        return
+    }
     axios.post("/users/authenticate", q)
         .then(res => {
             const [status,info] = res.data
@@ -179,7 +183,10 @@ export default function WrittenResponse() {
           )
       }
   }
-  
+  if(cookies.data==null || cookies.authorized==null)
+  {
+      return <div></div>
+  }
   return (
     Written()
   )

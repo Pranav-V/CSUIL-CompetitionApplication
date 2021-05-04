@@ -15,8 +15,8 @@ export default function WRGrading()
         history.push("/")
     }
     const q = {
-        "username" : cookies.data[0].username, 
-        "password" : cookies.data[0].password
+        "username" : cookies.data!=null?cookies.data[0].username:"", 
+        "password" : cookies.data!=null?cookies.data[0].password:""
     }
     function reload(i)
     {
@@ -70,6 +70,10 @@ export default function WRGrading()
                 setCookie('frqproblems',res.data,{path: '/'})
             })
             .catch(err => console.log(err))
+        
+        return () => {
+            setData([])
+        }
         
     }, [])
     var info = []

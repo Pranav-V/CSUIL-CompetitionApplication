@@ -21,8 +21,8 @@ export default function MultipleChoice()
     var t
     const arr = Array.from({length: 40}, (_, index) => index + 1);
     const q = {
-        "username" : cookies.data[0].username, 
-        "password" : cookies.data[0].password
+        "username" : cookies.data!=null?cookies.data[0].username:"", 
+        "password" : cookies.data!=null?cookies.data[0].password:""
     }
     useEffect(() => {
         t=setInterval(() => {
@@ -221,6 +221,10 @@ export default function MultipleChoice()
                 </div>
             )
         }
+    }
+    if(cookies.data==null || cookies.authorized==null)
+    {
+        return <div></div>
     }
     return( 
         MC()    
