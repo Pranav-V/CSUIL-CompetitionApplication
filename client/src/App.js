@@ -1,4 +1,4 @@
-import React, {useEffect} from "react"
+import React from "react"
 import {Route, Switch} from "react-router-dom"
 import clientHome from "./components/clientHome"
 import LogIn from "./components/LogIn"
@@ -7,6 +7,7 @@ import MultipleChoice from "./components/MultipleChoice"
 import writtenResponse from "./components/WrittenResponse"
 import WRGrading from "./components/WRGrading"
 import Rankings from "./components/Rankings"
+import Clarifications from "./components/Clarifications"
 export default function App()
 {
     return ( 
@@ -20,6 +21,7 @@ export default function App()
                 <Route path = "/admin_home" component = {adminHome} />
                 <Route path = "/admin_wrgrading" component = {WRGrading} />
                 <Route path = "/admin_rankings" component = {Rankings} />
+                <Route path = "/clarifications" component = {Clarifications} />
             </Switch>
         </div>
     )

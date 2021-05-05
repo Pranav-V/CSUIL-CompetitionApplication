@@ -20,7 +20,7 @@ export default function NavBar(props)
                     {props.current === "Written" ? <b className="nav-link" to="/">Written Response</b> :<Link className="nav-link" to="/writtenresponse">Written Response</Link>}
                 </li> 
                 <li className="nav-item">
-                    {props.current === "Clarifications" ? <b className="nav-link" to="/">Clarifications</b> :<Link className="nav-link" to="/writtenresponse">Clarifications</Link>}
+                    {props.current === "Clarifications" ? <b className="nav-link" to="/">Clarifications</b> :<Link className="nav-link" to="/clarifications">Clarifications</Link>}
                 </li>   
                 </ul>
             </div>  
