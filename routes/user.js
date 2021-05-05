@@ -53,6 +53,19 @@ router.route('/deleteAll').post((req,res) => {
         .then(() => res.json("Done"))
         .catch(err => res.json(err))
 })
+router.route('/individualrank').post((req,res) => {
+    const query = {
+        "isAdmin":false
+    }
+    User.find(query).sort({iScore:-1})
+        .then(info => {
+            const ranks = info.map(person => {
+                return [person.name,person.iScore!=-500?person.iScore:"0",person.team]
+            })
+            res.json(ranks)
+        })
+        .catch(err => res.json(err))
+})
 router.route('/findTeam').post((req,res) => {
     const team = req.body.team
     const query = {

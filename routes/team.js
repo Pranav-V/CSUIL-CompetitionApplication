@@ -18,11 +18,13 @@ router.route('/createteam').post((req,res) => {
         "11":[0,"Unattempted",0],
     }
     const wScore = 0
+    const teamScore = 0
     console.log("hereTeam")
     const newTeam = new Team({
         team,
         frqAnswers,
-        wScore
+        wScore,
+        teamScore
     })
 
     newTeam.save()
@@ -42,6 +44,31 @@ router.route('/delete').post((req,res) => {
         .then(() => res.json("complete"))
         .catch(err => res.json(err))
 })
+router.route('/updateScore').post((req,res) => {
+    const query = {
+        "team":req.body.team
+    }
+    let score = req.body.score
+    Team.find(query)
+        .then(info => {
+            info[0].teamScore += score
+            info[0].save()
+                .then(() => res.json("done"))
+                .err(err => res.json(err))
+        })
+        .err(err => res.json(err))
+        
+})
+router.route('/teamrank').post((req,res) => {
+    Team.find().sort({teamScore:-1})
+        .then(info => {
+            const ranks = info.map(team => {
+                return [team.team,team.teamScore,team.wScore]
+            })
+            res.json(ranks)
+        })
+        .catch(err => res.json(err))
+})
 router.route('/changeStatus').post((req,res) => {
     const problem = req.body.problem
     const status = req.body.status
@@ -57,7 +84,8 @@ router.route('/changeStatus').post((req,res) => {
             if(status=="Correct")
             {
                 copy[problem][2] = (copy[problem][0]*-5)+60
-                info[0].wScore += copy[problem][2] 
+                info[0].wScore += copy[problem][2]
+                info[0].teamScore += copy[problem][2] 
             }
             if(status=="Incorrect" || status=="Runtime Error" || status=="Compile Time Error")
             {

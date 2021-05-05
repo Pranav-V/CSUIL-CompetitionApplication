@@ -348,4 +348,22 @@ input[type='radio'] {
     border-radius: 50%;
   }
 
-  
+  #filter-toggle
+  {
+      border: 3px solid black;
+      padding: 20px;
+      display: inline-block;
+  }
+  #ranking-container
+  {
+      background-color: #48494B; 
+      text-align: center;
+      color: white;
+  }
+  #placement-container
+  {
+      color: white; 
+      border: 2px solid white; 
+      padding: 10px;
+      margin: 5px;
+  }

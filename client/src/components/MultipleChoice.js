@@ -136,6 +136,10 @@ export default function MultipleChoice()
                     } )
                     .catch(err => console.log(err))
 
+                axios.post("/team/updateScore",{"team":cookies.data[0].team,"score":score})
+                    .then(res => console.log("sent"))
+                    .err(err => console.log(err))
+
             })
             .catch(err => console.log(err))
     }
