@@ -83,7 +83,7 @@ export default function Rankings()
                 return(
                     <div className = "col-lg-12 col-md-12 col-sm-12">
                         <div id="placement-container">
-                            <h4 style={{textAlign:"left"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{i+1}.&nbsp; Team {e[0]} &nbsp;&nbsp;&nbsp;[Team Score: {e[1]} | Team: {e[2]}]</h4>
+                            <h4 style={{textAlign:"left"}}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{i+1}.&nbsp; Team {e[0]} &nbsp;&nbsp;&nbsp;[Team Score: {e[1]} | Team Written Score: {e[2]} | Team Multiple Choice Score: {e[1]-e[2]}]</h4>
                         </div>  
                     </div>)
             })
