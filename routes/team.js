@@ -16,6 +16,7 @@ router.route('/createteam').post((req,res) => {
         "9":[0,"Unattempted",0],
         "10":[0,"Unattempted",0],
         "11":[0,"Unattempted",0],
+        "12":[0,"Unattempted",0]
     }
     const wScore = 0
     const teamScore = 0

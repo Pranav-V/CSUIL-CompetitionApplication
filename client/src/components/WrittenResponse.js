@@ -32,7 +32,7 @@ export default function WrittenResponse() {
             return(
             <div key={name} id="frqlist">
                 <u>Problem {index+1} - {name}</u>
-                <p id="extrainfof">Attempts - {cookies.frqstatus==null?"":cookies.frqstatus[index][0]}  | Status - {cookies.frqstatus==null?"":cookies.frqstatus[index][1]} | Points - {cookies.frqstatus==null?"":cookies.frqstatus[index][2]}</p>
+                <p id="extrainfof">Attempts - {cookies.frqstatus[index][0]}  | Status - {cookies.frqstatus[index][1]} | Points - {cookies.frqstatus[index][2]}</p>
             </div>)
         })
     }
@@ -104,7 +104,7 @@ export default function WrittenResponse() {
     {
         if(cookies.data==null || cookies.authorized==null)
         {
-            return <div></div>
+      return <div></div>
         }
       if((!cookies.data[0].hasTakenWritten && cookies.admin[0].WrittentestEnabled))
       {
