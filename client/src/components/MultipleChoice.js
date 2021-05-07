@@ -63,7 +63,7 @@ export default function MultipleChoice()
                 .catch(err => console.log(err))
     },[timer])
     const inputs = arr.map(num => {
-        if(num<39)
+        if(num<41)
         {
             return (
         <div className = "col-lg-12 col-md-12 col-sm-12" key={num}>
