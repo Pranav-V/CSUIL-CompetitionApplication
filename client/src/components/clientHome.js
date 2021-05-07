@@ -100,7 +100,7 @@ export default function ClientHome()
     {
         return <div></div>
     }
-
+    
     return( 
         <div>
             <NavBar current = "Home"/>
@@ -118,11 +118,16 @@ export default function ClientHome()
                     <div className = "row">
                         <div className = "col-lg-12 col-md-12 col-sm-12">
                             <div id = "score-home">
-                                <h3>Multiple Choice Score (Individual): {cookies.data[0].iScore === -500?"_____":cookies.data[0].iScore} <b id="extrainfo">{cookies.data[0].iScore !== -500?"   [Correct-"+ disect[0]+", Incorrect-"+disect[1]+", Unattempted-"+disect[2]+"]":null}</b></h3>
-                                <h3>Multiple Choice Score (Team): {cookies.data[0].iScore === -500?"_____":teamscore}</h3>
-                                <h3>Written Response Score (Team): {cookies.admin!=null?(!cookies.admin[0].WrittentestEnabled?"_____":cookies.teamscorewr):"_____"}</h3>
-                                <hr id = "sepline" />
-                                <h3>= Contest Score (Team): {!(cookies.data[0].iScore !== -500 && cookies.admin[0].WrittentestEnabled)?"_____":(parseInt(teamscore)+parseInt(cookies.teamscorewr))}</h3>
+                                {cookies.data==null || cookies.admin==null?null:
+                                    <>
+                                    <h3>Multiple Choice Score (Individual): {cookies.data[0].iScore === -500?"_____":cookies.data[0].iScore} <b id="extrainfo">{cookies.data[0].iScore !== -500?"   [Correct-"+ disect[0]+", Incorrect-"+disect[1]+", Unattempted-"+disect[2]+"]":null}</b></h3>
+                                    <h3>Multiple Choice Score (Team): {cookies.data[0].iScore === -500?"_____":teamscore}</h3>
+                                    <h3>Written Response Score (Team): {cookies.admin!=null?(!cookies.admin[0].WrittentestEnabled?"_____":cookies.teamscorewr):"_____"}</h3>
+                                    <hr id = "sepline" />
+                                    <h3>= Contest Score (Team): {!(cookies.data[0].iScore !== -500 && cookies.admin[0].WrittentestEnabled)?"_____":(parseInt(teamscore)+parseInt(cookies.teamscorewr))}</h3>
+                                    </>
+                                }
+                                
                             </div>
                         </div>
                     </div>
