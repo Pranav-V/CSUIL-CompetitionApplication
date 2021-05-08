@@ -135,6 +135,29 @@ export default function ClientHome()
                         <div className = "col-lg-12 col-md-12 col-sm-12">
                             <div id = "score-home">
                                 <h3>Important Information: </h3>
+                                <br/>
+                                <h4>About the Test</h4>
+                                    <ul>
+                                        <li>45 minute - 40 Question Multiple Choice Test</li>
+                                        <li>2 hour - 12 Question - 3 Person Team Hands-On Programming</li>
+                                        <li><a target="_blank" href="https://drive.google.com/file/d/1N6l3W4-oBWYyhAQIRvC4QtLmBkNZRR7w/view">Topic List</a></li>
+                                    </ul>
+                                    
+                                    <h4>Dry Run</h4>
+                                    <ul>
+                                        <li><a target="_blank" href="https://www.cs.utexas.edu/~scottm/uil/2007/Dry%20Run.pdf">Dry Run Problem</a></li>
+                                        <li><a target="_blank" href="https://drive.google.com/file/d/1_teFDc8n9rTXlUqDi4ka0VuD11XUM6ez/view?usp=sharing">Dry Run Solution</a></li>
+                                        <li><a target="_blank" href="https://docs.oracle.com/javase/7/docs/api/java/util/Scanner.html">Scanner Documentation</a></li>
+                                    </ul>
+                                    <h4>Java IDE</h4>
+                                    <ul>
+                                        <li>IntelliJ IDEA (Recommended)</li>
+                                        <li>Eclipse</li>
+                                    </ul>
+                                    <h4>Java Documentation</h4>
+                                    <ul>
+                                        <li><a target="_blank" href="https://www.google.com/url?q=https%3A%2F%2Fdocs.oracle.com%2Fjavase%2F8%2Fdocs%2Fapi%2Findex.html%3Foverview-summary.html&sa=D&sntz=1&usg=AFQjCNFXFnUq7MLxoahXVeKhqMZQG49_5w">Java Docs</a></li>
+                                    </ul>
                             </div>
                         </div>
                     </div>
