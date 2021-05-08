@@ -142,7 +142,12 @@ export default function ClientHome()
                                         <li>2 hour - 12 Question - 3 Person Team Hands-On Programming</li>
                                         <li><a target="_blank" href="https://drive.google.com/file/d/1N6l3W4-oBWYyhAQIRvC4QtLmBkNZRR7w/view">Topic List</a></li>
                                     </ul>
-                                    
+                                    <h4>Test Documents</h4>
+                                    <ul>
+                                        <li>Multiple Choice Questions (disabled)</li>
+                                        <li>Written Response Questions (disabled)</li>
+                                        <li>Written Response Data Files (disabled)</li>
+                                    </ul>
                                     <h4>Dry Run</h4>
                                     <ul>
                                         <li><a target="_blank" href="https://www.cs.utexas.edu/~scottm/uil/2007/Dry%20Run.pdf">Dry Run Problem</a></li>
