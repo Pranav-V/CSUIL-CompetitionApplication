@@ -144,7 +144,7 @@ export default function ClientHome()
                                     </ul>
                                     <h4>Test Documents</h4>
                                     <ul>
-                                        <li>Multiple Choice Questions (disabled)</li>
+                                        <li><a href="https://drive.google.com/drive/folders/1mGifLJiil-4l9dIuscN_44mWk33hWMf2">Multiple Choice Questions</a></li>
                                         <li>Written Response Questions (disabled)</li>
                                         <li>Written Response Data Files (disabled)</li>
                                     </ul>
