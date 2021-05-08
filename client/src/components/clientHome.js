@@ -144,9 +144,9 @@ export default function ClientHome()
                                     </ul>
                                     <h4>Test Documents</h4>
                                     <ul>
-                                        <li><a href="https://drive.google.com/drive/folders/1mGifLJiil-4l9dIuscN_44mWk33hWMf2">Multiple Choice Questions</a></li>
-                                        <li>Written Response Questions (disabled)</li>
-                                        <li>Written Response Data Files (disabled)</li>
+                                        <li><a target="_blank" href="https://drive.google.com/drive/folders/1mGifLJiil-4l9dIuscN_44mWk33hWMf2">Multiple Choice Questions</a></li>
+                                        <li><a target="_blank" href="https://docs.google.com/document/d/1ELy0E-Wa-j0AlY_U17gVCb1prei48UvM/edit"></a>Written Response Questions</li>
+                                        <li><a target="_blank" href="https://drive.google.com/file/d/1vX6s3f3GdCggOhsN9haTBm0CW_xeAGMg/view?usp=sharing">Written Response Data Files</a></li>
                                     </ul>
                                     <h4>Dry Run</h4>
                                     <ul>
