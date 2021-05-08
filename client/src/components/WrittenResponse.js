@@ -79,6 +79,11 @@ export default function WrittenResponse() {
             alert("You have already gotten this question correct.")
             return
         }
+        if(cookies.frqstatus[document.getElementById("question-select").value][1]=="Grading...")
+        {
+            alert("Please wait until your latest submission has been graded.")
+            return
+        }
         if(cookies.frqstatus[document.getElementById("question-select").value][0]>=12)
         {
             alert("You have exceeded that maximum attempts for this problem.")
