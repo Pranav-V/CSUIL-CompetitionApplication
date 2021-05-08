@@ -82,7 +82,8 @@ router.route('/changeStatus').post((req,res) => {
         .then(info => {
             const copy = JSON.parse(JSON.stringify(info[0].frqAnswers))
             copy[problem][1] = status
-            if(status=="Correct")
+
+            if(status=="Correct" && problem!=0)
             {
                 copy[problem][2] = (copy[problem][0]*-5)+60
                 info[0].wScore += copy[problem][2]

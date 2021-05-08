@@ -31,7 +31,7 @@ export default function WrittenResponse() {
         statusInfo = problemNames.map((name,index) => {
             return(
             <div key={name} id="frqlist">
-                <u>Problem {index+1} - {name}</u>
+                <u>Problem {index} - {name}</u>
                 <p id="extrainfof">Attempts - {cookies.frqstatus[index][0]}  | Status - {cookies.frqstatus[index][1]} | Points - {cookies.frqstatus[index][2]}</p>
             </div>)
         })
@@ -135,6 +135,7 @@ export default function WrittenResponse() {
                                         <option value="9">{problemNames.length!=0?problemNames[9]:""}</option>
                                         <option value="10">{problemNames.length!=0?problemNames[10]:""}</option>
                                         <option value="11">{problemNames.length!=0?problemNames[11]:""}</option>
+                                        <option value="12">{problemNames.length!=0?problemNames[12]:""}</option>
                                     </select>
                                     <button onClick={submitFR} id="submit-fr" style={{float:"right"}}> Submit</button>
                                 </span>
