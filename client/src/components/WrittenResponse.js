@@ -74,35 +74,42 @@ export default function WrittenResponse() {
 
     function submitFR()
     {
-        if(cookies.frqstatus[document.getElementById("question-select").value][1]=="Correct")
-        {
-            alert("You have already gotten this question correct.")
-            return
-        }
-        if(cookies.frqstatus[document.getElementById("question-select").value][1]=="Grading...")
-        {
-            alert("Please wait until your latest submission has been graded.")
-            return
-        }
-        if(cookies.frqstatus[document.getElementById("question-select").value][0]>=12)
-        {
-            alert("You have exceeded that maximum attempts for this problem.")
-            return
-        }
-        var info = [code,document.getElementById("question-select").value,cookies.data[0].team]
-        axios.post("/question/addtoFRQ",{"info":info})
-            .then(() => {
-                alert("Submitted")
-            })
-            .catch(err => console.log(err))
-        const q =  {
-                "problem": document.getElementById("question-select").value, 
-                "status": "Grading...",
-                "team":cookies.data[0].team
+        axios.post("/team/getTeamInfo",{"team":cookies.data[0].team})
+        .then(res => {
+            setCookie('frqstatus',res.data,{path:'/'})
+            if(res.data[document.getElementById("question-select").value][1]=="Correct")
+            {
+                alert("You have already gotten this question correct.")
+                return
             }
-        axios.post("/team/changeStatus",q)
-            .then(res => window.location.reload())
-            .catch(err => console.log(err))
+            if(res.data[document.getElementById("question-select").value][1]=="Grading...")
+            {
+                alert("Please wait until your latest submission has been graded.")
+                return
+            }
+            if(res.data[document.getElementById("question-select").value][0]>=12)
+            {
+                alert("You have exceeded that maximum attempts for this problem.")
+                return
+            }
+            var info = [code,document.getElementById("question-select").value,cookies.data[0].team]
+            axios.post("/question/addtoFRQ",{"info":info})
+                .then(() => {
+                    alert("Submitted")
+                })
+                .catch(err => console.log(err))
+            const q =  {
+                    "problem": document.getElementById("question-select").value, 
+                    "status": "Grading...",
+                    "team":cookies.data[0].team
+                }
+            axios.post("/team/changeStatus",q)
+                .then(res => window.location.reload())
+                .catch(err => console.log(err))
+                })
+                
+        .catch(err => console.log(err))
+        
     }
     
     function Written()

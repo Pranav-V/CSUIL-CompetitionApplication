@@ -57,7 +57,7 @@ router.route('/updateScore').post((req,res) => {
                 .then(() => res.json("done"))
                 .err(err => res.json(err))
         })
-        .err(err => res.json(err))
+        .catch(err => res.json(err))
         
 })
 router.route('/teamrank').post((req,res) => {

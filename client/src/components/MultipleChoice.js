@@ -103,6 +103,12 @@ export default function MultipleChoice()
     function handleClick(event){
         let val = event.target.value
         let name = parseInt(event.target.name)
+        if(sans[name-1]==val)
+        {
+            event.target.checked = false;
+            sans[name-1] = null;
+            return; 
+        }
         sans[name-1] = val
     }
     if(!cookies.authorized)
@@ -127,19 +133,17 @@ export default function MultipleChoice()
                     "iScore":score, 
                     "iScoreinfo": (""+correct+","+incorrect+","+nanswered)
                 })
-                .then(() => console.log("Score Sent"))
-                .catch(err => console.log(err))
-
-                axios.post("/users/updateMCStatus/"+cookies.data[0]._id)
+                .then(() => 
+                    axios.post("/users/updateMCStatus/"+cookies.data[0]._id)
                     .then(() => {
-                        history.push("/home")
+                        axios.post("/team/updateScore",{"team":cookies.data[0].team,"score":score})
+                        .then(res => history.push("/home"))
+                        .catch(err => console.log(err))
+
+                        
                     } )
-                    .catch(err => console.log(err))
-
-                axios.post("/team/updateScore",{"team":cookies.data[0].team,"score":score})
-                    .then(res => console.log("sent"))
-                    .err(err => console.log(err))
-
+                    .catch(err => console.log(err)))
+                .catch(err => console.log(err))
             })
             .catch(err => console.log(err))
     }

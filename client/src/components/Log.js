@@ -48,10 +48,10 @@ export default function Log()
             <h2 id = "head">Round Rock HS UIL Meet</h2>
             <div id="login-box">
                 <p>Username: </p>
-                <input id = "l1" type = "text" spellcheck = "false" value = {username} onChange = {(event) => setusername(event.target.value)}/>
+                <input id = "l1" type = "text" spellCheck = "false" value = {username} onChange = {(event) => setusername(event.target.value)}/>
                 <br/>
                 <p>Password: </p>
-                <input id = "l2" type = "text" spellcheck = "false" value = {password} onChange = {(event) => setpassword(event.target.value)}/>
+                <input id = "l2" type = "text" spellCheck = "false" value = {password} onChange = {(event) => setpassword(event.target.value)}/>
                 <br/>
                 <p id="login-fail"> △ Unable to log in with provided credentials.</p>
                 <button id ="signin" onClick = {checkUser}>Sign-in</button>
