@@ -144,8 +144,9 @@ export default function ClientHome()
                                     </ul>
                                     <h4>Test Documents</h4>
                                     <ul>
-                                        <li><a target="_blank">Multiple Choice Questions (Locked)</a></li>
+                                        <li><a target="_blank" href = "https://drive.google.com/file/d/1CTmkeCtHI4JtHjXsFtnQnftelYL5w4nz/view?usp=sharing">Multiple Choice Questions</a></li>
                                         <li><a target="_blank">Written Response Questions (Locked)</a></li>
+                                        <li><a target="_blank">Written Response Questions - Novice Set (Locked)</a></li>
                                         <li><a target="_blank">Written Response Data Files (Locked)</a></li>
                                     </ul>
                                     <h4>Dry Run</h4>
