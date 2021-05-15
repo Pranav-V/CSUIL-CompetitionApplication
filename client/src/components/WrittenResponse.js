@@ -31,8 +31,9 @@ export default function WrittenResponse() {
         statusInfo = problemNames.map((name,index) => {
             return(
             <div key={name} id="frqlist">
-                <u>Problem {index} - {name}</u>
+                <u>Problem {index%12} - {name}</u>
                 <p id="extrainfof">Attempts - {cookies.frqstatus[index][0]}  | Status - {cookies.frqstatus[index][1]} | Points - {cookies.frqstatus[index][2]}</p>
+                {index==12?<div><h4 style={{textAlign:"left"}}>Novice Problems</h4></div>:null}
             </div>)
         })
     }
@@ -148,6 +149,10 @@ export default function WrittenResponse() {
                                         <option value="10">{problemNames.length!=0?problemNames[10]:""}</option>
                                         <option value="11">{problemNames.length!=0?problemNames[11]:""}</option>
                                         <option value="12">{problemNames.length!=0?problemNames[12]:""}</option>
+                                        <option value="13">{problemNames.length!=0?problemNames[13]:""}</option>
+                                        <option value="14">{problemNames.length!=0?problemNames[14]:""}</option>
+                                        <option value="15">{problemNames.length!=0?problemNames[15]:""}</option>
+                                        <option value="16">{problemNames.length!=0?problemNames[16]:""}</option>
                                     </select>
                                     <button onClick={submitFR} id="submit-fr" style={{float:"right"}}> Submit</button>
                                 </span>
@@ -171,7 +176,8 @@ export default function WrittenResponse() {
                         </div>
                         <div className = "col-lg-5 col-md-5 col-sm-12">
                             <div id="frq-status">
-                                    <h4>Question Status</h4>
+                                    <h3><u>Question Status</u></h3>
+                                    <h4 style={{textAlign:"left", marginLeft:"10px"}}>Advanced Problem Set</h4>
                                     {statusInfo}
                             </div>
                             <br/>

@@ -117,6 +117,7 @@ export default function MultipleChoice()
     }
     function handleMCSubmit()
     {
+        document.getElementById("submit-mc").style.display = "none"
         axios.post("/answer/retrieveanswers",{"frqID":0})
             .then(res => {
                 let ranswers = res.data[0].answers.split(',')
