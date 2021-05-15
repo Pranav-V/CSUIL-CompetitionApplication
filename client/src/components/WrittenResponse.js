@@ -31,7 +31,7 @@ export default function WrittenResponse() {
         statusInfo = problemNames.map((name,index) => {
             return(
             <div key={name} id="frqlist">
-                <u>Problem {index%12} - {name}</u>
+                <u>Problem {index%13 + (index>=13?1:0)} - {name}</u>
                 <p id="extrainfof">Attempts - {cookies.frqstatus[index][0]}  | Status - {cookies.frqstatus[index][1]} | Points - {cookies.frqstatus[index][2]}</p>
                 {index==12?<div><h4 style={{textAlign:"left"}}>Novice Problems</h4></div>:null}
             </div>)
