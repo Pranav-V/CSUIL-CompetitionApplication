@@ -16,7 +16,7 @@ app.get('*', (req, res) => {
 })
 
 console.log('here')
-mongoose.connect("mongodb+srv://pnav:pdatabase@cluster0.jvhte.mongodb.net/myFirstDatabase?retryWrites=true&w=majority", {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
+mongoose.connect(process.env.MONGODB_URI, {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true})
 const connection = mongoose.connection
 connection.once('open', () => {
     console.log('MongoDB connection established')
